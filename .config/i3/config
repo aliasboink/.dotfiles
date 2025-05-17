@@ -30,7 +30,7 @@ exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 # exec_always --no-startup-id picom --config ~/.config/picom/picom.conf -b
 
 # Feh autostart
-exec --no-startup-id feh --bg-scale ~/Pictures/a_mountain_landscape_with_trees_and_a_building_on_top.png -b
+exec --no-startup-id feh --bg-scale ~/wallpapers/a_mountain_landscape_with_trees_and_a_building_on_top.png -b
 
 # xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
 # screen before suspend. Use loginctl lock-session to lock your screen.

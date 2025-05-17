@@ -1,0 +1,67 @@
+# ~/.config/starship.toml
+
+palette = "tokyonight"
+
+# Use the default format
+format = """$all"""
+
+# Tokyo Night palette
+[palettes.tokyonight]
+blue = "#7aa2f7"
+cyan = "#7dcfff"
+green = "#9ece6a"
+purple = "#bb9af7"
+red = "#f7768e"
+yellow = "#e0af68"
+orange = "#ff9e64"
+fg = "#c0caf5"
+bg = "#1a1b26"
+
+# Apply color overrides per module (optional, default format kept)
+
+[directory]
+style = "blue"
+read_only_style = "red"
+truncation_length = 3
+truncation_symbol = "…/"
+
+[git_branch]
+style = "purple"
+
+[git_status]
+style = "red"
+
+[username]
+style_user = "green"
+style_root = "red"
+format = "[$user]($style) "
+show_always = false
+
+[hostname]
+style = "cyan"
+
+[character]
+success_symbol = "[❯](blue)"
+error_symbol = "[❯](red)"
+vicmd_symbol = "[❮](purple)"
+
+[cmd_duration]
+style = "yellow"
+
+[package]
+style = "blue"
+
+[python]
+style = "yellow"
+
+[nodejs]
+style = "green"
+
+[dotnet]
+style = "green"
+
+[rust]
+style = "red"
+
+[golang]
+style = "cyan"

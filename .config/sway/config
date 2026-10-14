@@ -63,3 +63,12 @@ input type:keyboard {
 
 # Pulsar mouse: swap left and right buttons (i3: /etc/X11/xorg.conf.d/90-pulsar.conf)
 input 14096:21506:Pulsar_1K_Dongle left_handed enabled
+
+# Bar: waybar, styled like polybar (.config/waybar). The bar block makes sway
+# start it on every output and restart it on reload.
+bar {
+    swaybar_command waybar
+}
+
+# Tell waybar's caps lock indicator to refresh (signal 8, see .config/waybar)
+bindsym --release Caps_Lock exec pkill -SIGRTMIN+8 waybar

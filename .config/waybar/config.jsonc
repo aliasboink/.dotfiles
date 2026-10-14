@@ -1,0 +1,113 @@
+// Waybar for sway, mirroring .config/polybar/config.ini (used by i3).
+// Same modules in the same order, | separators, Tokyo Night colours.
+{
+  "layer": "top",
+  "position": "top",
+  // polybar: 24pt at 96 dpi = 32 px; with output scale 1.33 this is 32 px too
+  "height": 24,
+  "spacing": 0,
+
+  "modules-left": ["sway/workspaces", "sway/window"],
+  "modules-right": [
+    "disk", "custom/sep",
+    "pulseaudio", "custom/sep",
+    "sway/language", "custom/capslock", "custom/sep",
+    "memory", "custom/sep",
+    "cpu", "custom/sep",
+    "network#wlan", "custom/sep",
+    "network#eth", "custom/sep",
+    "battery", "custom/sep",
+    "tray", "custom/sep",
+    "clock"
+  ],
+
+  "custom/sep": {
+    "format": "|",
+    "tooltip": false
+  },
+
+  "sway/workspaces": {
+    "format": "{name}",
+    "disable-scroll": false
+  },
+
+  // the | lives in the format so it disappears with an empty title, as in polybar
+  "sway/window": {
+    "format": "<span color='#565f89'>|</span>{title}",
+    "max-length": 60
+  },
+
+  "disk": {
+    "path": "/",
+    "interval": 25,
+    "format": "<span color='#7aa2f7'>{path}</span> {percentage_used}%"
+  },
+
+  "pulseaudio": {
+    "format": "<span color='#7aa2f7'>VOL</span> {volume}%",
+    "format-muted": "muted",
+    "tooltip": false
+  },
+
+  "sway/language": {
+    "format": "{short}"
+  },
+
+  // polybar's xkeyboard shows "caps lock" only while it's on. Reads the LED
+  // from /sys (keyboard-state would need the input group); sway sends
+  // signal 8 on Caps_Lock so it updates at once.
+  "custom/capslock": {
+    "exec": "grep -qx 1 /sys/class/leds/input*::capslock/brightness && echo 'caps lock' || echo",
+    "interval": 5,
+    "signal": 8,
+    "tooltip": false
+  },
+
+  "memory": {
+    "interval": 2,
+    "format": "<span color='#7aa2f7'>RAM</span> {percentage:2}%"
+  },
+
+  "cpu": {
+    "interval": 2,
+    "format": "<span color='#7aa2f7'>CPU</span> {usage:2}%"
+  },
+
+  "network#wlan": {
+    "interface": "wl*",
+    "interval": 5,
+    "format-wifi": "<span color='#7aa2f7'>{ifname}</span> {essid} {ipaddr}",
+    "format-ethernet": "<span color='#7aa2f7'>{ifname}</span> {ipaddr}",
+    "format-disconnected": "<span color='#7aa2f7'>{ifname}</span><span color='#707880'> disconnected</span>",
+    "tooltip": false
+  },
+
+  "network#eth": {
+    "interface": "en*",
+    "interval": 5,
+    "format-ethernet": "<span color='#7aa2f7'>{ifname}</span> {ipaddr}",
+    "format-wifi": "<span color='#7aa2f7'>{ifname}</span> {essid} {ipaddr}",
+    "format-disconnected": "<span color='#7aa2f7'>{ifname}</span><span color='#707880'> disconnected</span>",
+    "tooltip": false
+  },
+
+  "battery": {
+    "bat": "BAT0",
+    "adapter": "ADP0",
+    "interval": 15,
+    "format": "{capacity}%",
+    "tooltip": false
+  },
+
+  "tray": {
+    "spacing": 16
+  },
+
+  // click toggles between the two formats, like polybar's date-alt
+  "clock": {
+    "interval": 10,
+    "format": "{:%d-%m-%Y %H:%M}",
+    "format-alt": "{:%H:%M:%S}",
+    "tooltip": false
+  }
+}

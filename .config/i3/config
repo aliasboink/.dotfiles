@@ -31,7 +31,7 @@ exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 # exec_always --no-startup-id picom --config ~/.config/picom/picom.conf -b
 
 # Feh autostart
-exec --no-startup-id feh --bg-scale ~/wallpapers/a_mountain_landscape_with_trees_and_a_building_on_top.png -b
+exec --no-startup-id feh --bg-scale ~/wallpapers/a_mountain_landscape_with_trees_and_a_building_on_top.png
 
 # xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
 # screen before suspend. Use loginctl lock-session to lock your screen.
@@ -41,16 +41,18 @@ exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 # and nm-applet is a desktop environment-independent system tray GUI for it.
 exec --no-startup-id nm-applet
 
-# Use pactl to adjust volume in PulseAudio.
-set $refresh_i3status killall -SIGUSR1 i3status
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5% && $refresh_i3status
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5% && $refresh_i3status
-bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
-bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
+# Polkit agent for GUI authentication prompts (Arch path, then Debian/Mint path)
+exec --no-startup-id sh -c 'for a in /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 /usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1; do [ -x "$a" ] && exec "$a"; done'
+
+# Use pactl to adjust volume in PulseAudio (polybar picks up changes itself).
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5%
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5%
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle
+bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle
 
 # Use brightnessctl to adjust brightness
-bindsym XF86MonBrightnessUp exec --no-startup-id brightnessctl set 5+ && $refresh_i3status
-bindsym XF86MonBrightnessDown exec --no-startup-id brightnessctl set 5- && $refresh_i3status
+bindsym XF86MonBrightnessUp exec --no-startup-id brightnessctl set 5+
+bindsym XF86MonBrightnessDown exec --no-startup-id brightnessctl set 5-
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -60,7 +62,7 @@ floating_modifier $mod
 tiling_drag modifier titlebar
 
 # cycle sinks
-bindsym $mod+backslash exec /home/gleip/.config/i3/cycle_sink.sh
+bindsym $mod+backslash exec --no-startup-id ~/.config/i3/cycle_sink.sh
 
 # start a terminal
 bindsym $mod+Return exec alacritty
@@ -223,6 +225,6 @@ client.unfocused        #1a1b26  #1a1b26  #565f89  #1a1b26   #1a1b26
 client.urgent           #f7768e  #1a1b26  #ffffff  #ff007c   #f7768e
 client.placeholder      #000000  #1a1b26  #c0caf5  #000000   #1a1b26
 
-client.background       #F5F5F5
+client.background       #1a1b26
 
 gaps inner 0

@@ -41,8 +41,8 @@ bindsym $mod+Shift+r reload
 # exit sway (logs you out of your Wayland session)
 bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
 
-# Text size: i3 runs with Xft.dpi 128, which is a 1.33 scale on the laptop panel
-output eDP-1 scale 1.33
+# Laptop panel is 2560x1600: 1 is too small, 2 too big, 1.5 picked by eye
+output eDP-1 scale 1.5
 
 # Workspace outputs. Sway has no "primary" output, so the laptop panel (eDP-1)
 # plays that role: 1-9 prefer an external screen, 10 stays on the laptop.

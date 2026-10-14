@@ -9,6 +9,10 @@ include ~/.config/wm/common.conf
 # portals, notifications and the tray applet need
 include /etc/sway/config.d/*
 
+# A portal started earlier under i3 keeps i3's environment, so screenshots
+# (flameshot) time out. Restart it once sway's environment is exported.
+exec sh -c 'systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP && systemctl --user restart xdg-desktop-portal'
+
 # Everything below is sway only (Wayland programs or sway-specific syntax).
 
 # Start XDG autostart .desktop files using dex. See also
@@ -60,9 +64,6 @@ input type:keyboard {
     repeat_delay 660
     repeat_rate 25
 }
-
-# Pulsar mouse: swap left and right buttons (i3: /etc/X11/xorg.conf.d/90-pulsar.conf)
-input 14096:21506:Pulsar_1K_Dongle left_handed enabled
 
 # Bar: waybar, styled like polybar (.config/waybar). The bar block makes sway
 # start it on every output and restart it on reload.

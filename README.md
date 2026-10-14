@@ -14,15 +14,12 @@ On top of the Arch packages above:
 sudo pacman -S --needed sway swaybg swaylock swayidle waybar xdg-desktop-portal-wlr
 ```
 
-The proprietary NVIDIA driver needs `sway --unsupported-gpu`, which the stock session doesn't pass. Install the extra login entry and pick "Sway (NVIDIA)" in lightdm:
-```
-sudo install -m644 ~/.config/sway/sway-nvidia.desktop /usr/share/wayland-sessions/
-```
-
 Link the configs into `~` with stow:
 ```
 cd ~/.dotfiles && stow .
 ```
+
+Then pick "Sway" in lightdm's session menu.
 
 ## Linux Mint
 For general use and change to i3 with lightdm-gtk-greeter:

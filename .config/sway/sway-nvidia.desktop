@@ -1,0 +1,6 @@
+[Desktop Entry]
+Name=Sway (NVIDIA)
+Comment=Sway with --unsupported-gpu, needed on the proprietary NVIDIA driver
+Exec=sway --unsupported-gpu
+Type=Application
+DesktopNames=sway

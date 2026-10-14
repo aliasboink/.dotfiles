@@ -9,6 +9,10 @@
 #
 # Please see https://i3wm.org/docs/userguide.html for a complete reference!
 
+# Must be set here, not only in common.conf: i3 doesn't expose variables
+# from an included file to the file that includes it.
+set $mod Mod4
+
 # Keys, workspaces, colours and borders shared with sway
 include ~/.config/wm/common.conf
 

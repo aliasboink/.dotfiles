@@ -15,7 +15,7 @@
     "memory", "custom/sep",
     "cpu", "custom/sep",
     "network#wlan", "custom/sep",
-    "network#eth", "custom/sep",
+    "network#eth",
     "battery", "custom/sep",
     "tray", "custom/sep",
     "clock"
@@ -91,11 +91,12 @@
     "tooltip": false
   },
 
+  // battery and adapter are detected, so names like BAT1 or AC work too.
+  // The | before it is part of the format, so a desktop without a battery
+  // doesn't end up with two separators in a row.
   "battery": {
-    "bat": "BAT0",
-    "adapter": "ADP0",
     "interval": 15,
-    "format": "{capacity}%",
+    "format": "<span color='#565f89'>|</span>{capacity}%",
     "tooltip": false
   },
 

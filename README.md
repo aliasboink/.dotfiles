@@ -26,6 +26,40 @@ cd ~/.dotfiles && stow .
 
 Then pick "Sway" in lightdm's session menu.
 
+## Sway only: PC (AMD CPU, AMD GPU)
+A Sway-only install for the PC, with no i3, polybar or Xorg session. Every package here is something the sway, wm or waybar configs call.
+
+Base system (pacstrap):
+```
+base linux linux-firmware amd-ucode networkmanager sudo openssh git neovim efibootmgr grub
+```
+
+AMD graphics drivers:
+```
+sudo pacman -S --needed mesa vulkan-radeon
+```
+
+Sway session:
+```
+sudo pacman -S --needed \
+  sway swaybg swaylock swayidle waybar xdg-desktop-portal-wlr xorg-xwayland \
+  alacritty rofi dunst libnotify flameshot grim wl-clipboard \
+  dex polkit-gnome network-manager-applet \
+  pipewire pipewire-pulse wireplumber libpulse \
+  stow starship bash-completion papirus-icon-theme \
+  noto-fonts noto-fonts-emoji ttf-nerd-fonts-symbols
+```
+
+- `grim` is what flameshot uses to take screenshots on Wayland.
+- `libpulse` provides `pactl`, which the volume keys and `cycle_sink.sh` use.
+- `xorg-xwayland` runs X11-only apps such as Steam and Discord.
+- `ttf-nerd-fonts-symbols` holds the icons starship and waybar need. It replaces the full Nerd Fonts set, which runs to several GB.
+
+There is no display manager. To start Sway on login to tty1, add this to `~/.bash_profile`:
+```bash
+[ -z "$WAYLAND_DISPLAY" ] && [ "$XDG_VTNR" = 1 ] && exec sway
+```
+
 ## Per-machine settings
 The same configs run on every machine. Sway reads screen scale and other output settings for one machine from `.config/sway/hosts/<hostname>.conf`, named after `/etc/hostname`. Without that file sway uses its defaults, which suit a 1440p desktop. Give each machine its own hostname so they don't share a file.
 

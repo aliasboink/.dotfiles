@@ -58,6 +58,10 @@ workspace 8 output DP-1 DP-2 HDMI-A-1 eDP-1
 workspace 9 output DP-1 DP-2 HDMI-A-1 eDP-1
 workspace 10 output eDP-1
 
+# The TCL monitor reports 60 Hz as its preferred mode; run it at its 360 Hz
+# maximum. Matched by name rather than port so it follows the monitor.
+output "Technical Concepts Ltd 25P2A Pro 0xFFFFFFFF" mode 2560x1440@360Hz
+
 # Keyboard: same layout and key repeat as X (setxkbmap -query, xset q)
 input type:keyboard {
     xkb_layout us
